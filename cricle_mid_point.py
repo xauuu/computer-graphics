@@ -2,60 +2,65 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import math
+width = 600
+height = 600
+listPoint = []
 
 
-def myInit():
-    glClear(GL_COLOR_BUFFER_BIT)
-    glPointSize(1.0)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    gluOrtho2D(0.0, 600.0, 0.0, 600.0)
+def put8pixel(xc, yc, x, y):
+    glVertex3i(x+xc, y+yc, 0)
+    glVertex3i(y+xc, x+yc, 0)
+    glVertex3i(y+xc, -x+yc, 0)
+    glVertex3i(x+xc, -y+yc, 0)
+    glVertex3i(-x+xc, -y+yc, 0)
+    glVertex3i(-y+xc, -x+yc, 0)
+    glVertex3i(-y+xc, x+yc, 0)
+    glVertex3i(-x+xc, y+yc, 0)
 
 
-def draw_pixel(x, y):
-    glBegin(GL_POINTS)
-    glVertex2i(x, y)
-    glEnd()
-
-
-def draw_8_pixel(xc, yc, x, y):
-    draw_pixel(x+xc, y+yc)
-    draw_pixel(y+xc, x+yc)
-    draw_pixel(y+xc, -x+yc)
-    draw_pixel(x+xc, -y+yc)
-    draw_pixel(-x+xc, -y+yc)
-    draw_pixel(-y+xc, -x+yc)
-    draw_pixel(-y+xc, x+yc)
-    draw_pixel(-x+xc, y+yc)
-
-
-def draw_cricle(xc, yc, r):
+def CirClebres(xc, yc, r):
     x = 0
     y = r
     p = 5/4 - r
+    glBegin(GL_POINTS)
     while x <= y:
-        draw_8_pixel(xc, yc, x, y)
+        put8pixel(xc, yc, x, y)
         if p < 0:
             p += 2*x+3
         else:
             p += 2*(x-y)+5
             y -= 1
-        x +=1
+        x += 1
+    glEnd()
 
-def display():
+
+def myDisplay():
     glClear(GL_COLOR_BUFFER_BIT)
-    draw_cricle(int(x1), int(y1), int(r1))
+    glColor3f(1.0, 0.0, 0.0)
+    if len(listPoint) == 2:
+        x1, y1 = listPoint[0][0], listPoint[0][1]
+        x2, y2 = listPoint[1][0], listPoint[1][1]
+        r = math.sqrt((x2-x1)**2+(y2-y1)**2)
+        CirClebres(listPoint[0][0], listPoint[0][1], (int)(r))
     glFlush()
 
-x1 = input("x: ")
-y1 = input("y: ")
-r1 = input("r: ")
 
-glutInit()
-glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
-glutInitWindowSize(600, 600)
-glutInitWindowPosition(0, 0)
-glutCreateWindow("Breshnam's Cricle Drawing Algorithm")
-glutDisplayFunc(display)
-myInit()
-glutMainLoop()
+def MouseEventHandler(button, state, x, y):
+    if button == GLUT_LEFT_BUTTON and state == GLUT_UP:
+        if len(listPoint) == 2:
+            listPoint.clear()
+        listPoint.append([(int)(x-width/2), (int)(height/2-y)])
+        print(listPoint)
+        glutPostRedisplay()
+
+
+if __name__ == "__main__":
+    glutInit()
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+    glutInitWindowSize(width, height)
+    glutInitWindowPosition(10, 10)
+    glutCreateWindow("Lab1-CirCleBres")
+    gluOrtho2D(-width/2, height/2, -height/2, width/2)
+    glutDisplayFunc(myDisplay)
+    glutMouseFunc(MouseEventHandler)
+    glutMainLoop()
