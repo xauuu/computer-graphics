@@ -38,7 +38,6 @@ def reflection():
     drawTriangle(P.dot(M))
 
 
-
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
     drawTriangle(P)

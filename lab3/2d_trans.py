@@ -72,7 +72,7 @@ if __name__ == "__main__":
     glutInit()
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
     glutInitWindowSize(640, 640)
-    glutCreateWindow("Xauu")
+    glutCreateWindow("Xauuu")
     init()
     glutDisplayFunc(display)
     glutSpecialFunc(control)

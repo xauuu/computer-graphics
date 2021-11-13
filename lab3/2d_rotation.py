@@ -45,9 +45,7 @@ def rotate(x, y):
     #[[ cos(alpha),  sin(alpha),  0.],
     #[ -sin(alpha),  cos(alpha),  0.],
     #[x, y,  1.]]
-
-    Q = P@M
-    drawTriangle(Q)
+    drawTriangle(P@M)
 
 
 def control(key,  x,  y):
