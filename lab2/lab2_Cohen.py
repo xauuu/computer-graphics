@@ -50,7 +50,7 @@ def CohenClip(xA, yA, xB, yB):
                     xA += (ymax - yA) * m
                     yA = ymax
     if draw:
-        glColor3f(1.0, 1.0, 0.0)
+        glColor3f(1.0, 1.0, 0.1)
         glBegin(GL_LINES)
         glVertex2d(xA, yA)
         glVertex2d(xB, yB)

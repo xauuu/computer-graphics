@@ -40,7 +40,7 @@ def display():
     glClear(GL_COLOR_BUFFER_BIT)
     glColor3f(1.0, 1.0, 1.0)
     glBegin(GL_LINE_LOOP)
-    glVertex2i(300, 300)
+    glVertex2i(300, 301)
     glVertex2i(250, 250)
     glVertex2i(350, 250)
     glEnd()
