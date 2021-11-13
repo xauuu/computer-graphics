@@ -54,7 +54,7 @@ if __name__=="__main__":
 	glutInit()
 	glutInitWindowSize(width,height)
 	glutInitDisplayMode(GLUT_DEPTH)
-	glutCreateWindow("cube")
+	glutCreateWindow("3D")
 	init()
 	glutDisplayFunc(display)
 	glutReshapeFunc(resize)

@@ -187,7 +187,7 @@ if __name__ == "__main__":
     glutInit()
     glutInitWindowSize(640, 640)
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
-    glutCreateWindow("Khung_ket_noi")
+    glutCreateWindow("3D")
     init()
     glMatrixMode(GL_PROJECTION)
     glutDisplayFunc(display)

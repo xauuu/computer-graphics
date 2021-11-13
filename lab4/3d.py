@@ -210,7 +210,7 @@ def processMouseWheel(wheel, direction, x, y):
 glutInit()
 glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
 glutInitWindowSize(600, 600)
-glutCreateWindow("Xauu")
+glutCreateWindow("3D")
 init()
 glutReshapeFunc(reshape)
 glutDisplayFunc(drawings)
