@@ -12,19 +12,19 @@ tx = 0
 ty = 0
 
 def init():
-    glClearColor(1.0, 1.0, 1.0, 0.0)
+    glClearColor(0, 0, 0, 0.0)
     glMatrixMode(GL_PROJECTION)
     glOrtho(-320, 320, -320, 320, -1, 1)
 
-def drawPolygon(matrix):
-    glClear(GL_COLOR_BUFFER_BIT)
-    glColor3f(1.0, 0.0, 0.0)
-    glBegin(GL_POLYGON)
+def drawTriangle(matrix):
+    glBegin(GL_TRIANGLES)
+    glColor3f(1, 0, 1)
     glVertex2f(matrix[0, 0], matrix[0, 1])
+    glColor3f(1, 1, 0)
     glVertex2f(matrix[1, 0], matrix[1, 1])
+    glColor3f(0, 1, 1)
     glVertex2f(matrix[2, 0], matrix[2, 1])
     glEnd()
-    glFlush()
 
 
 def trans():
@@ -32,19 +32,19 @@ def trans():
                  [150, 150, 1],
                  [225, 50, 1]])
     
-    midX = (P[0, 0] + P[1, 0]) / 2
-    midY = (P[0, 1] + P[1, 1]) / 2
-
+    midGx = (P[0, 0] + P[1, 0] + P[2, 0] ) /3
+    midGy = (P[0, 1] + P[1, 1] + P[2, 1] ) /3
     M = np.eye(3)
-    M[2, 0] = tx - midX
-    M[2, 1] = ty - midY
-    drawPolygon(P.dot(M))
+    M[2, 0] = tx - midGx
+    M[2, 1] = ty - midGy
+    #[[ 1.,  0.,  0.],
+    #[ 0.,  1.,  0.],
+    #[tx, ty,  1.]]
+    drawTriangle(P@M)
 
 
-def control(key,  x,  y):
-    
-    global tx 
-    global ty 
+def control(key,  x,  y):  
+    global tx, ty 
     if key == GLUT_KEY_DOWN:
         ty -= 10
     if key == GLUT_KEY_UP:
@@ -56,8 +56,7 @@ def control(key,  x,  y):
     glutPostRedisplay()
 
 def MouseEventHandler(button, state, x, y):
-    global tx 
-    global ty 
+    global tx, ty 
     if button == GLUT_LEFT_BUTTON and state == GLUT_UP:
         tx = x - 320
         ty = 320 - y
@@ -66,13 +65,13 @@ def MouseEventHandler(button, state, x, y):
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
     trans()
+    glFlush()
 
 
 if __name__ == "__main__":
     glutInit()
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
     glutInitWindowSize(640, 640)
-    glutInitWindowPosition(320, 320)
     glutCreateWindow("Xauu")
     init()
     glutDisplayFunc(display)

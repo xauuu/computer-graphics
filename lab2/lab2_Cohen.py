@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 
 width = 600
 height = 600
-xmin, xmax, ymin, ymax = -100, 200, -100, 200
+xmin, xmax, ymin, ymax = -100, 130, -100, 130
 listPoint = []
 
 def Ma(x, y):
@@ -50,7 +50,7 @@ def CohenClip(xA, yA, xB, yB):
                     xA += (ymax - yA) * m
                     yA = ymax
     if draw:
-        glColor3f(0.0, 0.0, 1.0)
+        glColor3f(1.0, 1.0, 0.0)
         glBegin(GL_LINES)
         glVertex2d(xA, yA)
         glVertex2d(xB, yB)
@@ -67,7 +67,7 @@ def MouseEventHandler(button, state, x, y):
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
-    glColor3f(1.0, 0.0, 0.0)
+    glColor3f(0.0, 1.0, 1.0)
     glBegin(GL_LINE_LOOP)
     glVertex2f(xmin, ymin)
     glVertex2f(xmax, ymin)

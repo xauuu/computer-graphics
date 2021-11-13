@@ -5,7 +5,7 @@ import math
 
 width = 600
 height = 600
-xmin, xmax, ymin, ymax = -100, 200, -100, 200
+xmin, xmax, ymin, ymax = -100, 130, -100, 130
 listPoint = []
 
 def Ma(x, y):
@@ -22,7 +22,7 @@ def Ma(x, y):
 
 
 def draw(x0, y0, x1, y1):
-    glColor3f(0.0, 0.0, 1.0)
+    glColor3f(1.0, 0.0, 1.0)
     glBegin(GL_LINES)
     glVertex2d(x0, y0)
     glVertex2d(x1, y1)
@@ -71,7 +71,7 @@ def MouseEventHandler(button, state, x, y):
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
-    glColor3f(1.0, 0.0, 0.0)
+    glColor3f(1.0, 1.0, 0.0)
     glBegin(GL_LINE_LOOP)
     glVertex2f(xmin, ymin)
     glVertex2f(xmax, ymin)
